@@ -17,12 +17,13 @@ import { getCounterIndex } from './utils';
 
 export class Carousel extends React.PureComponent<{}, CarouselState> {
   public state = {
-    activeSlideIndex: 1
+    activeSlideIndex: 1,
+    animate: true
   };
 
   public render(): React.ReactNode {
     const { children } = this.props;
-    const { activeSlideIndex } = this.state;
+    const { activeSlideIndex, animate } = this.state;
     const childrenList = React.Children.toArray(children);
     const childrenLength = childrenList.length;
     const counterIndex = getCounterIndex(activeSlideIndex, childrenLength);
@@ -33,7 +34,7 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
     return (
       <StyledCarousel>
         <StyledInnerContent>
-          <StyledSlides slidesLength={childrenLength + 2} style={slidesStyles}>
+          <StyledSlides slidesLength={childrenLength + 2} style={slidesStyles} animate={animate}>
             <StyledSlide>{childrenList[childrenLength - 1]}</StyledSlide>
             {childrenList.map((slide, index) => (
               <StyledSlide key={`slide-${index}`}>{slide}</StyledSlide>
@@ -50,25 +51,26 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
     );
   }
 
-  private readonly switchSlides = () => {
-    const { activeSlideIndex } = this.state;
-
-    setTimeout(() => {
-      const childrenLength = React.Children.count(this.props.children);
-      if (activeSlideIndex === 0) {
-        this.changeSlide(childrenLength);
-      } else if (activeSlideIndex === childrenLength + 1) {
-        this.changeSlide(1);
-      }
-    }, animationTimeout);
+  private readonly switchSlides = (activeSlideIndex: number, animate: boolean) => () => {
+    if (animate) {
+      setTimeout(() => {
+        const childrenLength = React.Children.count(this.props.children);
+        if (activeSlideIndex === 0) {
+          this.changeSlide(childrenLength, false);
+        } else if (activeSlideIndex === childrenLength + 1) {
+          this.changeSlide(1, false);
+        }
+      }, animationTimeout);
+    }
   };
 
-  private readonly changeSlide = (activeSlideIndex: number) => {
+  private readonly changeSlide = (activeSlideIndex: number, animate: boolean = true) => {
     this.setState(
       {
-        activeSlideIndex
+        activeSlideIndex,
+        animate
       },
-      this.switchSlides
+      this.switchSlides(activeSlideIndex, animate)
     );
   };
 

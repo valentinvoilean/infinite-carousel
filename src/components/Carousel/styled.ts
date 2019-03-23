@@ -34,7 +34,9 @@ export const StyledSlides = styled.div<StyledSlidesProps>`
   display: flex;
   height: 100%;
   width: ${props => 100 * props.slidesLength}%;
-  transition: transform ${animationTimeout}ms;
+  transition: ${props => {
+    return props.animate ? `transform ${animationTimeout}ms` : 'none';
+  }};
 `;
 
 export const StyledSlide = styled.div`
