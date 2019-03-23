@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   StyledCarousel,
+  StyledCounter,
   StyledInnerContent,
   StyledNextButton,
   StyledPreviousButton,
@@ -24,6 +25,7 @@ export const Carousel: React.FunctionComponent = props => {
       </StyledInnerContent>
       <StyledPreviousButton />
       <StyledNextButton />
+      <StyledCounter>[ 1/10 ]</StyledCounter>
     </StyledCarousel>
   );
 };

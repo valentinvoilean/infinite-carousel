@@ -63,3 +63,14 @@ export const StyledPreviousButton = styled(StyledNextButton)`
   right: auto;
   transform: translateY(-50%) rotate(180deg);
 `;
+
+export const StyledCounter = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-family: 'Raleway';
+`;
