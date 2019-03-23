@@ -10,22 +10,52 @@ import {
   StyledSlides
 } from './styled';
 
-export const Carousel: React.FunctionComponent = props => {
-  const { children } = props;
-  const childrenList = React.Children.toArray(children);
+import { CarouselState } from './types';
 
-  return (
-    <StyledCarousel>
-      <StyledInnerContent>
-        <StyledSlides slidesLength={childrenList.length}>
-          {childrenList.map((slide, index) => (
-            <StyledSlide key={`slide-${index}`}>{slide}</StyledSlide>
-          ))}
-        </StyledSlides>
-      </StyledInnerContent>
-      <StyledPreviousButton />
-      <StyledNextButton />
-      <StyledCounter>[ 1/10 ]</StyledCounter>
-    </StyledCarousel>
-  );
-};
+export class Carousel extends React.PureComponent<{}, CarouselState> {
+  public state = {
+    activeSlideIndex: 1
+  };
+
+  public render(): React.ReactNode {
+    const { children } = this.props;
+    const { activeSlideIndex } = this.state;
+    const childrenList = React.Children.toArray(children);
+    const childrenLength = childrenList.length;
+
+    return (
+      <StyledCarousel>
+        <StyledInnerContent>
+          <StyledSlides slidesLength={childrenLength}>
+            {childrenList.map((slide, index) => (
+              <StyledSlide key={`slide-${index}`}>{slide}</StyledSlide>
+            ))}
+          </StyledSlides>
+        </StyledInnerContent>
+        <StyledPreviousButton onClick={this.slideToPreviousSlide} />
+        <StyledNextButton onClick={this.slideToNextSlide} />
+        <StyledCounter>
+          {activeSlideIndex}/{childrenLength}
+        </StyledCounter>
+      </StyledCarousel>
+    );
+  }
+
+  private readonly changeSlide = (activeSlideIndex: number) => {
+    this.setState({
+      activeSlideIndex
+    });
+  };
+
+  private readonly slideToNextSlide = () => {
+    const childrenLength = React.Children.count(this.props.children);
+    const { activeSlideIndex } = this.state;
+    const newIndex = Math.min(activeSlideIndex + 1, childrenLength);
+    this.changeSlide(newIndex);
+  };
+
+  private readonly slideToPreviousSlide = () => {
+    const newIndex = Math.max(this.state.activeSlideIndex - 1, 1);
+    this.changeSlide(newIndex);
+  };
+}
