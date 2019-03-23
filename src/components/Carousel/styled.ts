@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { StyledSlidesProps } from './types';
+
 export const StyledCarousel = styled.div`
   position: relative;
   width: ${({ theme }) => theme.gallery.width}px;
@@ -12,5 +14,31 @@ export const StyledCarousel = styled.div`
     content: '';
     width: 100%;
     padding-top: calc(100% / (${({ theme }) => theme.gallery.aspectRatio}));
+  }
+`;
+
+export const StyledInnerContent = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  outline: none;
+`;
+
+export const StyledSlides = styled.div<StyledSlidesProps>`
+  display: flex;
+  height: 100%;
+  width: ${props => 100 * props.slidesLength}%;
+`;
+
+export const StyledSlide = styled.div`
+  display: flex;
+  flex: 1 0 0;
+  align-items: center;
+  
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;
