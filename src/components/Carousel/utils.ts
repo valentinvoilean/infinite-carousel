@@ -1,11 +1,4 @@
 export const getCounterIndex = (index: number, max: number) => {
-  if (index === 0) {
-    return max;
-  }
-
-  if (index === max + 1) {
-    return 1;
-  }
-
-  return index;
+  const intIndex = Math.round(index);
+  return intIndex === 0 ? max : intIndex === max + 1 ? 1 : intIndex;
 };
