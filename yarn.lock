@@ -2752,6 +2752,11 @@ cookie@0.3.1:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
   integrity sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
 
+cool-images@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/cool-images/-/cool-images-1.0.3.tgz#f757585f33d8121a9b0ad907e3dfe55d73df231b"
+  integrity sha512-wjHvTcX/boIoGOrO4b12G3zie0v9TBm/Ljg2WmLPbnmOGhYjLkKd2FQaVkzzAhl6KqJkOHspfIcgoE7uk5djhQ==
+
 copy-concurrently@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/copy-concurrently/-/copy-concurrently-1.0.5.tgz#92297398cae34937fcafd6ec8139c18051f0b5e0"
