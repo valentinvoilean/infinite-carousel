@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { StyledCarousel, StyledInnerContent, StyledSlide, StyledSlides } from './styled';
+import {
+  StyledCarousel,
+  StyledInnerContent,
+  StyledNextButton,
+  StyledPreviousButton,
+  StyledSlide,
+  StyledSlides
+} from './styled';
 
 export const Carousel: React.FunctionComponent = props => {
   const { children } = props;
@@ -15,6 +22,8 @@ export const Carousel: React.FunctionComponent = props => {
           ))}
         </StyledSlides>
       </StyledInnerContent>
+      <StyledPreviousButton />
+      <StyledNextButton />
     </StyledCarousel>
   );
 };
