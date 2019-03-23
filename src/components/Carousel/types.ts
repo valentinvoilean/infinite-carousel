@@ -9,4 +9,5 @@ export interface CarouselState {
   animate: boolean;
   interactionStartTime: Date;
   initialXPosition: number;
+  enableDragging: boolean;
 }

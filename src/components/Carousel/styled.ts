@@ -37,6 +37,11 @@ export const StyledSlides = styled.div<StyledSlidesProps>`
   transition: ${props => {
     return props.animate ? `transform ${animationTimeout}ms` : 'none';
   }};
+
+  * {
+    user-select: none; // disable selection
+    pointer-events: none; // disable dragging
+  }
 `;
 
 export const StyledSlide = styled.div`
