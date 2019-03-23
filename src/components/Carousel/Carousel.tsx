@@ -21,6 +21,7 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
   public state = {
     activeSlideIndex: 1,
     slideOffset: 1,
+    interactionStartTime: new Date(),
     animate: true,
     initialXPosition: 0
   };
@@ -65,7 +66,8 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
   private readonly handleTouchStart = (event: React.TouchEvent) => {
     this.setState({
       initialXPosition: event.touches[0].pageX,
-      animate: false
+      animate: false,
+      interactionStartTime: new Date()
     });
   };
 
@@ -79,16 +81,25 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
   };
 
   private readonly handleTouchEnd = () => {
-    this.changeSlide(Math.round(this.state.slideOffset));
+    const { activeSlideIndex, interactionStartTime, slideOffset } = this.state;
+    const timeElapsed = new Date().getTime() - interactionStartTime.getTime();
+    const velocity = Math.abs((slideOffset / timeElapsed) * 10000);
+    let newIndex = Math.round(slideOffset);
+
+    if (velocity > 20 && slideOffset !== activeSlideIndex) {
+      newIndex = slideOffset < activeSlideIndex ? activeSlideIndex - 1 : activeSlideIndex + 1;
+    }
+
+    this.changeSlide(newIndex);
   };
 
-  private readonly switchSlides = (activeSlideIndex: number, animate: boolean) => () => {
+  private readonly switchSlides = (newSlideIndex: number, animate: boolean) => () => {
     if (animate) {
       setTimeout(() => {
         const childrenLength = React.Children.count(this.props.children);
-        if (activeSlideIndex === 0) {
+        if (newSlideIndex === 0) {
           this.changeSlide(childrenLength, false);
-        } else if (activeSlideIndex === childrenLength + 1) {
+        } else if (newSlideIndex === childrenLength + 1) {
           this.changeSlide(1, false);
         }
       }, animationTimeout);
