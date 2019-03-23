@@ -4,6 +4,8 @@ import { StyledSlidesProps } from './types';
 
 import arrowIcon from '../../images/arrow.svg';
 
+import { animationTimeout } from './constants';
+
 export const StyledCarousel = styled.div`
   position: relative;
   width: ${({ theme }) => theme.gallery.width}px;
@@ -32,7 +34,7 @@ export const StyledSlides = styled.div<StyledSlidesProps>`
   display: flex;
   height: 100%;
   width: ${props => 100 * props.slidesLength}%;
-  transition: transform 0.4s;
+  transition: transform ${animationTimeout}ms;
 `;
 
 export const StyledSlide = styled.div`
