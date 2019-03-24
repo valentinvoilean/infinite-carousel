@@ -127,7 +127,7 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
     this.changeSlide(newIndex);
   };
 
-  private readonly switchSlides = (newSlideIndex: number, animate: boolean) => () => {
+  private readonly switchSlides = (newSlideIndex: number, animate: boolean) => {
     if (animate) {
       setTimeout(() => {
         const childrenLength = React.Children.count(this.props.children);
@@ -141,16 +141,14 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
   };
 
   private readonly changeSlide = (newSlideIndex: number, animate: boolean = true) => {
-    this.setState(
-      {
-        animate,
-        slideOffset: newSlideIndex,
-        activeSlideIndex: newSlideIndex,
-        initialXPosition: 0,
-        enableDragging: false
-      },
-      this.switchSlides(newSlideIndex, animate)
-    );
+    this.setState({
+      animate,
+      slideOffset: newSlideIndex,
+      activeSlideIndex: newSlideIndex, // TODO
+      initialXPosition: 0,
+      enableDragging: false
+    });
+    this.switchSlides(newSlideIndex, animate);
   };
 
   private readonly slideToNextSlide = () => {

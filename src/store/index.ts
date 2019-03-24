@@ -1,10 +1,10 @@
 import { combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { galleryReducer } from './gallery/reducer';
+import { carouselReducer } from './carousel/reducer';
 
 const rootReducer = combineReducers({
-  gallery: galleryReducer
+  carousel: carouselReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
