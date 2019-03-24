@@ -10,23 +10,14 @@ import {
   StyledSlides
 } from './styled';
 
-import { CarouselState } from './types';
+import { CarouselProps } from './types';
 
 import { animationTimeout } from './constants';
 import { getCounterIndex } from './utils';
 
 import { theme } from '../../theme';
 
-export class Carousel extends React.PureComponent<{}, CarouselState> {
-  public state = {
-    activeSlideIndex: 1,
-    slideOffset: 1,
-    interactionStartTime: new Date(),
-    animate: true,
-    initialXPosition: 0,
-    enableDragging: false
-  };
-
+export class Carousel extends React.PureComponent<CarouselProps> {
   private readonly innerContent: React.RefObject<HTMLDivElement> = React.createRef<HTMLDivElement>();
 
   public componentDidMount(): void {
@@ -38,8 +29,8 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
   }
 
   public render(): React.ReactNode {
-    const { children } = this.props;
-    const { animate, slideOffset } = this.state;
+    const { children, slideOffset } = this.props;
+    const { animate } = this.props;
     const childrenList = React.Children.toArray(children);
     const childrenLength = childrenList.length;
     const counterIndex = getCounterIndex(slideOffset, childrenLength);
@@ -74,25 +65,15 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
     );
   }
 
-  private readonly onStart = (initialXPosition: number) => {
-    this.setState({
-      initialXPosition,
-      animate: false,
-      interactionStartTime: new Date()
-    });
-  };
-
   private readonly handleTouchStart = (event: React.TouchEvent) => {
-    this.onStart(event.touches[0].pageX);
+    this.props.setInitialXPosition(event.touches[0].pageX);
   };
 
   private readonly onMove = (newXPosition: number) => {
-    const { initialXPosition, activeSlideIndex } = this.state;
+    const { initialXPosition, activeSlideIndex, setSlideOffset } = this.props;
     const percentageOffset = (initialXPosition - newXPosition) / theme.gallery.width;
 
-    this.setState({
-      slideOffset: activeSlideIndex + percentageOffset
-    });
+    setSlideOffset(activeSlideIndex + percentageOffset);
   };
 
   private readonly handleTouchMove = (event: React.TouchEvent) => {
@@ -100,14 +81,13 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
   };
 
   private readonly handleMouseDown = (event: React.MouseEvent) => {
-    this.setState({
-      enableDragging: true
-    });
-    this.onStart(event.pageX);
+    const { toggleMouseDragging, setInitialXPosition } = this.props;
+    toggleMouseDragging(true);
+    setInitialXPosition(event.pageX);
   };
 
   private readonly handleMouseMove = (event: React.MouseEvent) => {
-    if (!this.state.enableDragging) {
+    if (!this.props.enableDragging) {
       return;
     }
 
@@ -115,7 +95,7 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
   };
 
   private readonly handleEnd = () => {
-    const { activeSlideIndex, interactionStartTime, slideOffset } = this.state;
+    const { activeSlideIndex, interactionStartTime, slideOffset } = this.props;
     const timeElapsed = new Date().getTime() - interactionStartTime.getTime();
     const velocity = Math.abs((slideOffset / timeElapsed) * 10000);
     let newIndex = Math.round(slideOffset);
@@ -141,25 +121,20 @@ export class Carousel extends React.PureComponent<{}, CarouselState> {
   };
 
   private readonly changeSlide = (newSlideIndex: number, animate: boolean = true) => {
-    this.setState({
-      animate,
-      slideOffset: newSlideIndex,
-      activeSlideIndex: newSlideIndex, // TODO
-      initialXPosition: 0,
-      enableDragging: false
-    });
+    this.props.setSlideOffset(newSlideIndex);
+    this.props.changeSlide(newSlideIndex, animate);
     this.switchSlides(newSlideIndex, animate);
   };
 
   private readonly slideToNextSlide = () => {
-    const childrenLength = React.Children.count(this.props.children);
-    const { activeSlideIndex } = this.state;
+    const { children, activeSlideIndex } = this.props;
+    const childrenLength = React.Children.count(children);
     const newIndex = Math.min(activeSlideIndex + 1, childrenLength + 1);
     this.changeSlide(newIndex);
   };
 
   private readonly slideToPreviousSlide = () => {
-    const newIndex = Math.max(this.state.activeSlideIndex - 1, 0);
+    const newIndex = Math.max(this.props.activeSlideIndex - 1, 0);
     this.changeSlide(newIndex);
   };
 }

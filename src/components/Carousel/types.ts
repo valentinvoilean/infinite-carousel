@@ -1,13 +1,9 @@
+import { ReduxConnectProps } from './withReduxConnect';
+
 export interface StyledSlidesProps {
   slidesLength: number;
   animate: boolean;
 }
 
-export interface CarouselState {
-  activeSlideIndex: number;
-  slideOffset: number;
-  animate: boolean;
-  interactionStartTime: Date;
-  initialXPosition: number;
-  enableDragging: boolean;
-}
+export type ComposedProps = ReduxConnectProps;
+export type CarouselProps = ComposedProps;
