@@ -14,21 +14,19 @@ import { CarouselProps } from './types';
 
 import { getCounterIndex } from './utils';
 
-import { theme } from '../../theme';
-
 export class Carousel extends React.PureComponent<CarouselProps> {
   private readonly innerContent: React.RefObject<HTMLDivElement> = React.createRef<HTMLDivElement>();
 
   public componentDidMount(): void {
-    window.addEventListener('mouseup', this.handleEnd);
+    window.addEventListener('mouseup', this.props.handleEnd);
   }
 
   public componentWillUnmount(): void {
-    window.removeEventListener('mouseup', this.handleEnd);
+    window.removeEventListener('mouseup', this.props.handleEnd);
   }
 
   public render(): React.ReactNode {
-    const { children, slideOffset, slideToPreviousSlide, slideToNextSlide } = this.props;
+    const { children, slideOffset, slideToPreviousSlide, slideToNextSlide, handleEnd } = this.props;
     const { animate } = this.props;
     const childrenList = React.Children.toArray(children);
     const childrenLength = childrenList.length;
@@ -43,7 +41,7 @@ export class Carousel extends React.PureComponent<CarouselProps> {
           ref={this.innerContent}
           onTouchStart={this.handleTouchStart}
           onTouchMove={this.handleTouchMove}
-          onTouchEnd={this.handleEnd}
+          onTouchEnd={handleEnd}
           onMouseDown={this.handleMouseDown}
           onMouseMove={this.handleMouseMove}
         >
@@ -64,21 +62,6 @@ export class Carousel extends React.PureComponent<CarouselProps> {
     );
   }
 
-  private readonly handleTouchStart = (event: React.TouchEvent) => {
-    this.props.setInitialXPosition(event.touches[0].pageX);
-  };
-
-  private readonly onMove = (newXPosition: number) => {
-    const { initialXPosition, activeSlideIndex, setSlideOffset } = this.props;
-    const percentageOffset = (initialXPosition - newXPosition) / theme.gallery.width;
-
-    setSlideOffset(activeSlideIndex + percentageOffset);
-  };
-
-  private readonly handleTouchMove = (event: React.TouchEvent) => {
-    this.onMove(event.touches[0].pageX);
-  };
-
   private readonly handleMouseDown = (event: React.MouseEvent) => {
     const { toggleMouseDragging, setInitialXPosition } = this.props;
     toggleMouseDragging(true);
@@ -90,19 +73,14 @@ export class Carousel extends React.PureComponent<CarouselProps> {
       return;
     }
 
-    this.onMove(event.pageX);
+    this.props.handleMove(event.pageX);
   };
 
-  private readonly handleEnd = () => {
-    const { activeSlideIndex, interactionStartTime, slideOffset, changeSlide } = this.props;
-    const timeElapsed = new Date().getTime() - interactionStartTime.getTime();
-    const velocity = Math.abs((slideOffset / timeElapsed) * 10000);
-    let newIndex = Math.round(slideOffset);
+  private readonly handleTouchStart = (event: React.TouchEvent) => {
+    this.props.setInitialXPosition(event.touches[0].pageX);
+  };
 
-    if (velocity > 20 && slideOffset !== activeSlideIndex) {
-      newIndex = slideOffset < activeSlideIndex ? activeSlideIndex - 1 : activeSlideIndex + 1;
-    }
-
-    changeSlide(newIndex);
+  private readonly handleTouchMove = (event: React.TouchEvent) => {
+    this.props.handleMove(event.touches[0].pageX);
   };
 }

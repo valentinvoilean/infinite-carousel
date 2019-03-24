@@ -9,4 +9,11 @@ export interface ChangeSlideHandlerInnerProps extends ReduxConnectProps {
   children?: React.ReactNode;
 }
 
-export type SlideHandlersProps = ChangeSlideHandlerProps;
+export interface InteractSlideHandlerProps {
+  handleMove: (newXPosition: number) => void;
+  handleEnd: () => void;
+}
+
+export type InteractSlideHandlerInnerProps = ReduxConnectProps & ChangeSlideHandlerProps;
+
+export type SlideHandlersProps = ChangeSlideHandlerProps & InteractSlideHandlerProps;
