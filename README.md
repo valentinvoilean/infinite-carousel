@@ -1,44 +1,64 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+#### IF YOU WOULD LIKE TO JUMP TO THE LAST VERSION OF THE APP WHICH INCLUDES ALL THE FEATURES ( REDUX + RECOMPOSE ), I RECOMMEND YOU TO CHECKOUT THE `recompose` BRANCH.
+#### DEMO: http://carousel-vmv.surge.sh/
+
+## Installation
+
+### `yarn` or `npm install`
+
+## Branches
+
+The `master` branch contains the carousel created in React without involving any other library. 
+This branch is perfect for understanding how the carousel was built since all the logic is in one file.
+
+Inside the `redux` branch, the internal state was moved to the redux store.
+
+There is an additional branch (and probably the most important) called `recompose` where I replaced the classes with `recompose` related HOCS.
+
+All the `TESTS` are located inside the `recompose` branch.
+
 ## Available Scripts
 
-In the project directory, you can run:
+### `yarn start`
 
-### `npm start`
-
-Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### `yarn test`
 
-### `npm test`
+All the `TESTS` are located in the `recompose` branch.
+Please checkout this branch before running this command.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[x] actions
 
-### `npm run build`
+[x] reducers
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[x] `<App />` component - `App.test.tsx`: snapshot testing
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+[x] `<Carousel />` component - `Carousel.test.tsx`: snapshot testing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[x] Higher order components: `withButtonHandlers`, `withMouseHandlers`, `withSlideHandlers`, `withTouchHandlers`
 
-### `npm run eject`
+### `yarn build`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Builds the app for production to the `build` folder.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[x] SSR
+The HTML page is generated completely by the `react-static-generator`. The result can be seen in `build/index.html`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Other info
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+[x] installed & configured Tslint, Prettier, Editorconfig, Husky
 
-## Learn More
+[x] installed Redux
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[x] installed StyledComponents
+The style config is loaded through the ThemeProvider. The default theme configuration can be found in `src/theme.ts`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[x] the carousel supports `swiping` (pls check it on a larger screen like iPad. Didn't have time to make it responsive)
+
+[x] the carousel supports `mouse dragging`
+
+[x] the slides animate on change
+
+[x] the carousel has an infinite loop
