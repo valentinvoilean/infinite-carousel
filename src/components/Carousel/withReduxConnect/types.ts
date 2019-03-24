@@ -1,10 +1,15 @@
-import { changeSlide, setInitialXPosition, toggleMouseDragging, setSlideOffset } from '../../../store/carousel/actions';
+import {
+  changeSlideIndex,
+  setInitialXPosition,
+  setSlideOffset,
+  toggleMouseDragging
+} from '../../../store/carousel/actions';
 import { CarouselState } from '../../../store/carousel/types';
 
 export type StateProps = CarouselState;
 
 export interface DispatchProps {
-  changeSlide: typeof changeSlide;
+  changeSlideIndex: typeof changeSlideIndex;
   setInitialXPosition: typeof setInitialXPosition;
   toggleMouseDragging: typeof toggleMouseDragging;
   setSlideOffset: typeof setSlideOffset;

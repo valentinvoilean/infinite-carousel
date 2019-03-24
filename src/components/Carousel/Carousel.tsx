@@ -12,7 +12,6 @@ import {
 
 import { CarouselProps } from './types';
 
-import { animationTimeout } from './constants';
 import { getCounterIndex } from './utils';
 
 import { theme } from '../../theme';
@@ -29,7 +28,7 @@ export class Carousel extends React.PureComponent<CarouselProps> {
   }
 
   public render(): React.ReactNode {
-    const { children, slideOffset } = this.props;
+    const { children, slideOffset, slideToPreviousSlide, slideToNextSlide } = this.props;
     const { animate } = this.props;
     const childrenList = React.Children.toArray(children);
     const childrenLength = childrenList.length;
@@ -56,8 +55,8 @@ export class Carousel extends React.PureComponent<CarouselProps> {
             <StyledSlide>{childrenList[0]}</StyledSlide>
           </StyledSlides>
         </StyledInnerContent>
-        <StyledPreviousButton onClick={this.slideToPreviousSlide} />
-        <StyledNextButton onClick={this.slideToNextSlide} />
+        <StyledPreviousButton onClick={slideToPreviousSlide} />
+        <StyledNextButton onClick={slideToNextSlide} />
         <StyledCounter>
           {counterIndex}/{childrenLength}
         </StyledCounter>
@@ -95,7 +94,7 @@ export class Carousel extends React.PureComponent<CarouselProps> {
   };
 
   private readonly handleEnd = () => {
-    const { activeSlideIndex, interactionStartTime, slideOffset } = this.props;
+    const { activeSlideIndex, interactionStartTime, slideOffset, changeSlide } = this.props;
     const timeElapsed = new Date().getTime() - interactionStartTime.getTime();
     const velocity = Math.abs((slideOffset / timeElapsed) * 10000);
     let newIndex = Math.round(slideOffset);
@@ -104,37 +103,6 @@ export class Carousel extends React.PureComponent<CarouselProps> {
       newIndex = slideOffset < activeSlideIndex ? activeSlideIndex - 1 : activeSlideIndex + 1;
     }
 
-    this.changeSlide(newIndex);
-  };
-
-  private readonly switchSlides = (newSlideIndex: number, animate: boolean) => {
-    if (animate) {
-      setTimeout(() => {
-        const childrenLength = React.Children.count(this.props.children);
-        if (newSlideIndex === 0) {
-          this.changeSlide(childrenLength, false);
-        } else if (newSlideIndex === childrenLength + 1) {
-          this.changeSlide(1, false);
-        }
-      }, animationTimeout);
-    }
-  };
-
-  private readonly changeSlide = (newSlideIndex: number, animate: boolean = true) => {
-    this.props.setSlideOffset(newSlideIndex);
-    this.props.changeSlide(newSlideIndex, animate);
-    this.switchSlides(newSlideIndex, animate);
-  };
-
-  private readonly slideToNextSlide = () => {
-    const { children, activeSlideIndex } = this.props;
-    const childrenLength = React.Children.count(children);
-    const newIndex = Math.min(activeSlideIndex + 1, childrenLength + 1);
-    this.changeSlide(newIndex);
-  };
-
-  private readonly slideToPreviousSlide = () => {
-    const newIndex = Math.max(this.props.activeSlideIndex - 1, 0);
-    this.changeSlide(newIndex);
+    changeSlide(newIndex);
   };
 }

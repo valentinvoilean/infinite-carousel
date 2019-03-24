@@ -9,13 +9,13 @@ export interface CarouselState {
 }
 
 // Describing the different ACTION NAMES available
-export const CHANGE_SLIDE = 'CAROUSEL::CHANGE_SLIDE';
+export const CHANGE_SLIDE_INDEX = 'CAROUSEL::CHANGE_SLIDE_INDEX';
 export const SET_INITIAL_X_POSITION = 'CAROUSEL::SET_INITIAL_X_POSITION';
 export const TOGGLE_MOUSE_DRAGGING = 'CAROUSEL::TOGGLE_MOUSE_DRAGGING';
 export const SET_SLIDE_OFFSET = 'CAROUSEL::SET_SLIDE_OFFSET';
 
-interface ChangeSlideAction {
-  type: typeof CHANGE_SLIDE;
+interface ChangeSlideIndexAction {
+  type: typeof CHANGE_SLIDE_INDEX;
   payload: {
     newSlideIndex: number;
     animate: boolean;
@@ -38,7 +38,7 @@ interface SetSlideOffsetAction {
 }
 
 export type CarouselActionTypes =
-  | ChangeSlideAction
+  | ChangeSlideIndexAction
   | SetInitialXPositionAction
   | ToggleMouseDraggingAction
   | SetSlideOffsetAction;

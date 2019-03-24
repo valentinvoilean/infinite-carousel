@@ -1,4 +1,15 @@
-import { Carousel } from './Carousel';
-import { withReduxConnect } from './withReduxConnect';
+import { compose } from 'recompose';
 
-export const CarouselContainer = withReduxConnect(Carousel);
+import { Carousel } from './Carousel';
+
+import { withButtonHandlers } from './withButtonHandlers';
+import { withReduxConnect } from './withReduxConnect';
+import { withSlideHandlers } from './withSlideHandlers';
+
+import { ComposedProps } from './types';
+
+export const CarouselContainer = compose<ComposedProps, {}>(
+  withReduxConnect,
+  withSlideHandlers,
+  withButtonHandlers
+)(Carousel);

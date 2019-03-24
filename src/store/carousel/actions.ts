@@ -1,7 +1,7 @@
-import { CHANGE_SLIDE, SET_INITIAL_X_POSITION, SET_SLIDE_OFFSET, TOGGLE_MOUSE_DRAGGING } from './types';
+import { CHANGE_SLIDE_INDEX, SET_INITIAL_X_POSITION, SET_SLIDE_OFFSET, TOGGLE_MOUSE_DRAGGING } from './types';
 
-export const changeSlide = (newSlideIndex: number, animate: boolean = true) => ({
-  type: CHANGE_SLIDE,
+export const changeSlideIndex = (newSlideIndex: number, animate: boolean = true) => ({
+  type: CHANGE_SLIDE_INDEX,
   payload: { newSlideIndex, animate }
 });
 

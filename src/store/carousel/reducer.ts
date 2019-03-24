@@ -1,7 +1,7 @@
 import {
   CarouselActionTypes,
   CarouselState,
-  CHANGE_SLIDE,
+  CHANGE_SLIDE_INDEX,
   SET_INITIAL_X_POSITION,
   SET_SLIDE_OFFSET,
   TOGGLE_MOUSE_DRAGGING
@@ -18,7 +18,7 @@ const initialState: CarouselState = {
 
 export const carouselReducer = (state = initialState, action: CarouselActionTypes): CarouselState => {
   switch (action.type) {
-    case CHANGE_SLIDE:
+    case CHANGE_SLIDE_INDEX:
       return {
         ...state,
         animate: action.payload.animate,

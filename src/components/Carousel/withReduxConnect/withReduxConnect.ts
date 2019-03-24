@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { AppState } from '../../../store';
 import { DispatchProps, StateProps } from './types';
 
-import { changeSlide, setInitialXPosition, setSlideOffset, toggleMouseDragging } from '../../../store/carousel/actions';
+import {
+  changeSlideIndex,
+  setInitialXPosition,
+  setSlideOffset,
+  toggleMouseDragging
+} from '../../../store/carousel/actions';
 
 export const withReduxConnect = connect<StateProps, DispatchProps, {}, AppState>(
   state => ({
@@ -15,7 +20,7 @@ export const withReduxConnect = connect<StateProps, DispatchProps, {}, AppState>
     enableDragging: state.carousel.enableDragging
   }),
   {
-    changeSlide,
+    changeSlideIndex,
     setInitialXPosition,
     toggleMouseDragging,
     setSlideOffset
