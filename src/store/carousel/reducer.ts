@@ -7,10 +7,10 @@ import {
   TOGGLE_MOUSE_DRAGGING
 } from './types';
 
-const initialState: CarouselState = {
+export const initialState: CarouselState = {
   activeSlideIndex: 1,
   slideOffset: 1,
-  interactionStartTime: new Date(),
+  interactionStartTime: Date.now(),
   animate: true,
   initialXPosition: 0,
   enableDragging: false
@@ -36,7 +36,7 @@ export const carouselReducer = (state = initialState, action: CarouselActionType
         ...state,
         initialXPosition: action.initialXPosition,
         animate: false,
-        interactionStartTime: new Date()
+        interactionStartTime: Date.now()
       };
     case SET_SLIDE_OFFSET:
       return {

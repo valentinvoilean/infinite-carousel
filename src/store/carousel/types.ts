@@ -3,7 +3,7 @@ export interface CarouselState {
   activeSlideIndex: number;
   slideOffset: number;
   animate: boolean;
-  interactionStartTime: Date;
+  interactionStartTime: number;
   initialXPosition: number;
   enableDragging: boolean;
 }
