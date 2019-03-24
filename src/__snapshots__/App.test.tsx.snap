@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders without crashing 1`] = `
+<div
+  className="sc-gzVnrw kHtxYq"
+>
+  <h1
+    className="sc-htoDjs dfiKfh"
+  >
+    Infinite Carousel
+  </h1>
+  <div
+    className="sc-bdVaJa fwjnIo"
+  >
+    <div
+      className="sc-bwzfXH hAsabR"
+      onMouseDown={[Function]}
+      onMouseMove={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+    >
+      <div
+        className="sc-htpNat laMCQG"
+        style={
+          Object {
+            "transform": "translate3d(-8.333333333333334%, 0, 0)",
+          }
+        }
+      >
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-9"
+            src="http://lorempixel.com/1024/576/sports"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-0"
+            src="http://lorempixel.com/1024/576/abstract"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-1"
+            src="http://lorempixel.com/1024/576/city"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-2"
+            src="http://lorempixel.com/1024/576/people"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-3"
+            src="http://lorempixel.com/1024/576/transport"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-4"
+            src="http://lorempixel.com/1024/576/animals"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-5"
+            src="http://lorempixel.com/1024/576/food"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-6"
+            src="http://lorempixel.com/1024/576/nature"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-7"
+            src="http://lorempixel.com/1024/576/business"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-8"
+            src="http://lorempixel.com/1024/576/nightlife"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-9"
+            src="http://lorempixel.com/1024/576/sports"
+          />
+        </div>
+        <div
+          className="sc-bxivhb bFwOSl"
+        >
+          <img
+            alt="img-0"
+            src="http://lorempixel.com/1024/576/abstract"
+          />
+        </div>
+      </div>
+    </div>
+    <button
+      className="sc-ifAKCX sc-EHOje jBhozE"
+      onClick={[Function]}
+    />
+    <button
+      className="sc-ifAKCX dAqXQt"
+      onClick={[Function]}
+    />
+    <div
+      className="sc-bZQynM labZrD"
+    >
+      1
+      /
+      10
+    </div>
+  </div>
+  <a
+    className="sc-dnqmqq jAPEFj"
+    href="http://valentinvoilean.com"
+  >
+    by Valentin-Marian Voilean
+  </a>
+</div>
+`;

@@ -1,8 +1,6 @@
 import 'normalize.css';
 import 'react-placeholder/lib/reactPlaceholder.css';
 
-// @ts-ignore
-import coolImages from 'cool-images';
 import React from 'react';
 import GoogleFontLoader from 'react-google-font-loader';
 import { ThemeProvider } from 'styled-components';
@@ -14,7 +12,18 @@ import { fonts } from './constants';
 import { theme } from './theme';
 
 export const App: React.FunctionComponent = () => {
-  const images = coolImages.many(576, 1024, 10);
+  const images = [
+    'http://lorempixel.com/1024/576/abstract',
+    'http://lorempixel.com/1024/576/city',
+    'http://lorempixel.com/1024/576/people',
+    'http://lorempixel.com/1024/576/transport',
+    'http://lorempixel.com/1024/576/animals',
+    'http://lorempixel.com/1024/576/food',
+    'http://lorempixel.com/1024/576/nature',
+    'http://lorempixel.com/1024/576/business',
+    'http://lorempixel.com/1024/576/nightlife',
+    'http://lorempixel.com/1024/576/sports'
+  ];
 
   return (
     <ThemeProvider theme={theme}>

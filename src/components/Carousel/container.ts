@@ -8,9 +8,9 @@ import { withReduxConnect } from './withReduxConnect';
 import { withSlideHandlers } from './withSlideHandlers';
 import { withTouchHandlers } from './withTouchHandlers';
 
-import { ComposedProps } from './types';
+import { ComposedProps, OwnProps } from './types';
 
-export const CarouselContainer = compose<ComposedProps, {}>(
+export const CarouselContainer = compose<ComposedProps, OwnProps>(
   withReduxConnect,
   withSlideHandlers,
   withButtonHandlers,
