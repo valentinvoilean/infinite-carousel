@@ -3,11 +3,13 @@ import {
   CarouselState,
   CHANGE_SLIDE,
   SET_INITIAL_X_POSITION,
+  SET_SLIDE_OFFSET,
   TOGGLE_MOUSE_DRAGGING
 } from './types';
 
 const initialState: CarouselState = {
   activeSlideIndex: 1,
+  slideOffset: 1,
   interactionStartTime: new Date(),
   animate: true,
   initialXPosition: 0,
@@ -35,6 +37,11 @@ export const carouselReducer = (state = initialState, action: CarouselActionType
         initialXPosition: action.initialXPosition,
         animate: false,
         interactionStartTime: new Date()
+      };
+    case SET_SLIDE_OFFSET:
+      return {
+        ...state,
+        slideOffset: action.slideOffset
       };
     default:
       return state;

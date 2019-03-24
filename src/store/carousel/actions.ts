@@ -1,4 +1,4 @@
-import { CHANGE_SLIDE, SET_INITIAL_X_POSITION, TOGGLE_MOUSE_DRAGGING } from './types';
+import { CHANGE_SLIDE, SET_INITIAL_X_POSITION, SET_SLIDE_OFFSET, TOGGLE_MOUSE_DRAGGING } from './types';
 
 export const changeSlide = (newSlideIndex: number, animate: boolean = true) => ({
   type: CHANGE_SLIDE,
@@ -11,6 +11,11 @@ export const setInitialXPosition = (initialXPosition: number) => ({
 });
 
 export const toggleMouseDragging = (enableDragging: boolean) => ({
-  type: typeof TOGGLE_MOUSE_DRAGGING,
+  type: TOGGLE_MOUSE_DRAGGING,
   enableDragging
+});
+
+export const setSlideOffset = (slideOffset: number) => ({
+  type: SET_SLIDE_OFFSET,
+  slideOffset
 });
